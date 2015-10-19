@@ -29,7 +29,7 @@ EC.Server = function (resourceNameSingular, resourceNamePlural, urlPrefix) {
   // SAVE
   this.save = function (data, options) {
     var options = _.merge({}, options, {urlPrefix: _urlPrefix});
-    var hash = _modules.saver.processor(data, resourceNameSingular, resourceNamePlural, options);
+    var hash = _modules.saver.process(data, resourceNameSingular, resourceNamePlural, options);
     $.ajax(hash);
   }
 
