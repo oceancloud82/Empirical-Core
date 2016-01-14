@@ -1,6 +1,6 @@
 class Cms::UsersController < ApplicationController
   before_filter :signed_in!
-  before_filter :admin!
+  before_filter :staff!
   before_action :set_user, only: [:show, :show_json, :edit, :update, :destroy]
 
   def index
@@ -38,7 +38,7 @@ class Cms::UsersController < ApplicationController
   end
 
   def sign_in
-    session[:admin_id] = current_user.id
+    session[:staff_id] = current_user.id
     super(User.find(params[:id]))
     redirect_to profile_path
   end
@@ -51,6 +51,7 @@ class Cms::UsersController < ApplicationController
       response = @user.update_teacher params
       render json: response
     else
+
       if @user.update_attributes(user_params)
         redirect_to cms_users_path, notice: 'User was successfully updated.'
       else
