@@ -177,6 +177,12 @@ class ActivitySession < ActiveRecord::Base
     percentage
   end
 
+  def hide
+    binding.pry
+    visible = false
+    save(validate: false)
+  end
+
   alias owner user
 
   # TODO legacy fix

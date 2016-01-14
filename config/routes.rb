@@ -42,7 +42,7 @@ EmpiricalGrammar::Application.routes.draw do
     end
 
     resources :classroom_activities, only: [:destroy, :update], as: 'classroom_activities_path'
-
+    put "classroom_activities/:id/hide" => 'classroom_activities#hide'
 
     get 'my_account' => 'classroom_manager#my_account'
     get 'my_account_data' => 'classroom_manager#my_account_data'

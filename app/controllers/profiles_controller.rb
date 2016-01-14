@@ -29,7 +29,6 @@ class ProfilesController < ApplicationController
   def student(is_json=false)
     if @classroom = current_user.classroom
       if is_json
-
         grouped_scores, is_last_page = Profile::Processor.new.query(current_user, params[:current_page].to_i)
 
         next_activity_session = ActivitySession.joins(classroom_activity: [:unit])

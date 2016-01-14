@@ -12,6 +12,15 @@ class Teachers::ClassroomActivitiesController < ApplicationController
     render json: {}
   end
 
+  def hide
+    classroom_activity = ClassroomActivity.find(params[:id])
+    classroom_activity.make_invisible
+    # classroom_activity.activity_sessions.map(&:hide)
+    # classroom_activity.visible = false
+    # classroom_activity.save(validate: false)
+    render json: {}
+  end
+
   def destroy
     cas = @classroom_activity.unit.classroom_activities.where(activity: @classroom_activity.activity)
     cas.each{|ca| ca.destroy}

@@ -51,6 +51,7 @@ class Teachers::UnitsController < ApplicationController
 
   def hide
     unit = Unit.find(params[:id])
+    unit.classroom_activities.map(&:hide)
     unit.visible = false
     unit.save(validate: false)
     render json: {}

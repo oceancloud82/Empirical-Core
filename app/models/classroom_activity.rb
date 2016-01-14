@@ -6,6 +6,7 @@ class ClassroomActivity < ActiveRecord::Base
   has_many :activity_sessions, dependent: :destroy
 
   scope :with_topic, ->(tid) { joins(:topic).where(topics: {id: tid}) }
+  default_scope { where(visible: true)}
 
 
   after_create :assign_to_students
@@ -38,6 +39,13 @@ class ClassroomActivity < ActiveRecord::Base
     else
       classroom.students
     end
+  end
+
+
+  def make_invisible
+    activity_sessions.map(&:hide)
+    visible = false
+    save(validate: false)
   end
 
 
